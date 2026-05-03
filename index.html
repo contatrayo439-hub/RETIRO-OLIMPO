@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CASINO OLIMPO</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    color: white;
+    min-height: 100vh;
+    overflow: hidden;
+
+    /* 🔥 FONDO ANIMADO */
+    background: radial-gradient(circle at 30% 30%, #0a0f2c, #000);
+}
+
+/* ✨ GRADIENTE EN MOVIMIENTO */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at 70% 60%, rgba(255,140,0,0.25), transparent 60%);
+    animation: moveGlow 8s infinite alternate ease-in-out;
+    z-index: -2;
+}
+
+@keyframes moveGlow {
+    0% {
+        transform: translate(-10%, -10%) scale(1);
+    }
+    100% {
+        transform: translate(10%, 10%) scale(1.2);
+    }
+}
+
+/* 🔥 DESTELLOS */
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: repeating-radial-gradient(circle, rgba(255,215,0,0.05) 0px, transparent 2px);
+    animation: sparkle 6s linear infinite;
+    z-index: -3;
+}
+
+@keyframes sparkle {
+    from { transform: translateY(0); }
+    to { transform: translateY(20px); }
+}
+
+/* PARTICULAS */
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+/* CONTENEDOR */
+.container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+/* LOGO */
+.logo {
+    position: relative;
+}
+
+.logo img {
+    width: 140px;
+    border-radius: 50%;
+    position: relative;
+}
+
+/* ARO */
+.logo::before {
+    content: "";
+    position: absolute;
+    width: 170px;
+    height: 170px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    border-top: 3px solid gold;
+    border-bottom: 3px solid orange;
+    animation: spin 4s linear infinite;
+    box-shadow: 0 0 25px orange;
+}
+
+@keyframes spin {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* TITULO */
+.title {
+    font-size: 38px;
+    margin: 20px 0;
+    font-weight: bold;
+    color: gold;
+    text-shadow: 0 0 15px orange;
+}
+
+/* SUB */
+.subtitle {
+    color: #00e5ff;
+    margin-bottom: 10px;
+}
+
+/* CONTADOR */
+.counter {
+    font-size: 13px;
+    color: #00ff9c;
+    margin-bottom: 15px;
+    animation: blink 1.5s infinite;
+}
+
+@keyframes blink {
+    50% { opacity: 0.4; }
+}
+
+/* BOTON */
+.btn {
+    display: block;
+    width: 85%;
+    max-width: 340px;
+    margin: 20px auto;
+    padding: 18px;
+    border-radius: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    color: black;
+    background: linear-gradient(90deg, #ffcc00, #ff6f00);
+    box-shadow: 0 0 25px rgba(255,140,0,0.7);
+    animation: pulseBtn 1.8s infinite;
+}
+
+@keyframes pulseBtn {
+    50% { transform: scale(1.08); }
+}
+
+/* CARDS */
+.card {
+    margin: 15px auto;
+    width: 85%;
+    max-width: 340px;
+    padding: 14px;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.2);
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    background: rgba(255,255,255,0.05);
+}
+
+/* WHATSAPP */
+.whatsapp {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #25D366;
+    padding: 15px;
+    border-radius: 50%;
+    font-size: 22px;
+    text-decoration: none;
+    color: white;
+    box-shadow: 0 0 20px rgba(0,0,0,0.6);
+}
+
+html {
+    background: #000;
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="particles"></canvas>
+
+<div class="container">
+
+<div class="logo">
+    <img src="logo/logo.png">
+</div>
+
+<div class="title">PLATAFORMA</div>
+<div class="subtitle">RÁPIDO Y SEGURO</div>
+
+<div class="counter">🔥 120 jugadores en línea</div>
+
+<a href="https://greenbet.uno/login" class="btn">
+🎰 JUGÁ AHORA
+</a>
+
+<div class="card" onclick="window.location.href='cargar.html'">
+<span>¿Cómo cargar desde la plataforma?</span> ➡️
+</div>
+
+<div class="card" onclick="window.location.href='retirar.html'">
+<span>¿Cómo retirar mi dinero?</span> ➡️
+</div>
+
+</div>
+
+
+<script>
+const canvas = document.getElementById("particles");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particles = [];
+
+for (let i = 0; i < 120; i++) {
+    particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: Math.random() * 2.5,
+        speedY: Math.random() * 0.8 + 0.2,
+        opacity: Math.random()
+    });
+}
+
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    particles.forEach(p => {
+        p.y += p.speedY;
+
+        if (p.y > canvas.height) {
+            p.y = 0;
+            p.x = Math.random() * canvas.width;
+        }
+
+        ctx.fillStyle = `rgba(255,215,0,${p.opacity})`;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fill();
+    });
+
+    requestAnimationFrame(animate);
+}
+
+animate();
+
+// CONTADOR DINÁMICO
+let n = 120;
+setInterval(() => {
+    n += Math.floor(Math.random() * 3);
+    document.querySelector(".counter").innerText = "🔥 " + n + " jugadores en línea";
+}, 3000);
+</script>
+
+</body>
+</html>
