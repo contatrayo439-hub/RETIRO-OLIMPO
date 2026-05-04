@@ -24,7 +24,13 @@ body::before {
     content: "";
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.65); /* OSCURECE FONDO */
+
+    background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.6),
+        rgba(0,0,0,0.8)
+    );
+
     z-index: -1;
 }
 
@@ -87,17 +93,15 @@ canvas {
 }
 
 .logo img {
-    width: 120px;
-    margin-top: 20px;
+    width: 110px;
 
     border-radius: 50%;
-    border: 2px solid gold;
+    border: 2px solid rgba(255,215,0,0.5);
 
     box-shadow:
-        0 0 15px gold,
-        0 0 40px rgba(255,215,0,0.6);
+        0 0 20px rgba(255,215,0,0.4);
 
-    animation: float 3s ease-in-out infinite;
+    animation: float 4s ease-in-out infinite;
 }
 
 @keyframes float {
@@ -129,49 +133,32 @@ canvas {
 
 /* TITULO */
 .title {
-    font-size: 34px;
+    font-size: 32px;
     font-weight: 800;
     letter-spacing: 1px;
-    padding: 14px 30px;
-    border-radius: 16px;
-    display: inline-block;
 
-    margin-top: 15px;
+    padding: 12px 24px;
+    border-radius: 12px;
 
     background: rgba(0,0,0,0.75);
+    border: 1px solid rgba(255,215,0,0.3);
 
-    border: 2px solid #ff8c00;
+    color: #ffd700;
 
-    color: gold;
+    box-shadow: 0 0 15px rgba(255,215,0,0.25);
 
-    box-shadow:
-        0 0 20px #ff8c00,
-        0 0 50px rgba(255,140,0,0.7),
-        inset 0 0 10px rgba(255,255,255,0.15);
-
-    text-shadow:
-    0 0 10px rgba(255,215,0,0.7);
+    backdrop-filter: blur(4px);
 }
 
 /* SUB */
 .subtitle {
     color: #00ffc8;
-    font-size: 32px;
+    font-size: 16px;
     font-weight: 600;
-    margin-top: 5px;
 
+    margin-top: 8px;
 
-    background: linear-gradient(90deg, #00ff88, #ffd700);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-
-    text-shadow:
-        0 0 20px rgba(0,255,136,0.7),
-        0 0 30px rgba(255,215,0,0.6);
-
-            color: #00ffcc;
-    font-weight: bold;
-    text-shadow: 0 0 8px rgba(0,255,200,0.4);
+    text-shadow: none; /* quitamos exceso */
 }
 
 /* CONTADOR */
@@ -188,9 +175,7 @@ canvas {
 
 /* BOTON */
 .btn {
-    display: block;
     width: 100%;
-    margin: 25px auto;
     padding: 16px;
 
     border-radius: 12px;
@@ -198,19 +183,21 @@ canvas {
     font-size: 16px;
     font-weight: 700;
 
-    text-decoration: none;
-    color: black;
+    color: #000;
 
     background: linear-gradient(90deg, #ffd700, #ff8c00);
 
     box-shadow:
-        0 5px 15px rgba(255,140,0,0.4);
+        0 8px 25px rgba(255,140,0,0.35);
 
-    transition: 0.2s;
+    border: none;
+
+    transition: all 0.2s ease;
 }
 
 .btn:active {
-    transform: scale(0.97);
+    transform: scale(0.96);
+    box-shadow: 0 4px 10px rgba(255,140,0,0.3);
 }
 
 .btn:hover {
@@ -295,13 +282,12 @@ canvas {
 /* CARDS */
 .card {
     width: 100%;
-    margin: 12px auto;
     padding: 14px;
 
     border-radius: 12px;
 
-    background: rgba(0,0,0,0.7);
-    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(0,0,0,0.65);
+    border: 1px solid rgba(255,255,255,0.08);
 
     display: flex;
     justify-content: space-between;
@@ -309,12 +295,12 @@ canvas {
 
     font-size: 14px;
 
-    transition: 0.2s;
+    transition: all 0.2s ease;
 }
 
 .card:active {
     transform: scale(0.97);
-    border-color: gold;
+    border-color: rgba(255,215,0,0.5);
 }
 
 .card:hover {
@@ -435,6 +421,16 @@ html {
 
 * {
     -webkit-tap-highlight-color: transparent;
+}
+
+.section-text {
+    color: #00ffcc;
+    font-size: 14px;
+    font-weight: 600;
+
+    margin: 20px 0 10px;
+
+    opacity: 0.85;
 }
 
 </style>
