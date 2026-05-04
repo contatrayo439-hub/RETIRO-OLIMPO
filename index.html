@@ -221,6 +221,33 @@ body::before {
 .flash.active {
     opacity: 1;
 }
+
+.whatsapp-channel {
+    margin-top: 10px;
+    padding: 14px;
+    border-radius: 12px;
+
+    font-size: 14px;
+    font-weight: bold;
+
+    background: linear-gradient(90deg, #25D366, #1ebe5d);
+    color: white;
+
+    cursor: pointer;
+
+    box-shadow: 0 0 15px rgba(37,211,102,0.5);
+
+    transition: 0.2s;
+}
+
+.whatsapp-channel:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 25px rgba(37,211,102,0.9);
+}
+
+.whatsapp-channel:active {
+    transform: scale(0.95);
+}
 </style>
 </head>
 
@@ -259,6 +286,10 @@ body::before {
     <div class="card" onclick="irA('retirar.html')">
         <span>¿CÓMO HAGO PARA RETIRAR MI DINERO?</span> ➡️
     </div>
+
+    <div class="whatsapp-channel" onclick="irCanal()">
+    📢 No olvides unirte a nuestro canal oficial de WhatsApp
+</div>
 
 </div>
 
@@ -338,6 +369,16 @@ setInterval(() => {
     n += Math.floor(Math.random() * 3);
     document.querySelector(".counter").innerText = "🔥 " + n + " jugadores en línea";
 }, 3000);
+
+function irCanal() {
+    vibrar();
+    sonido();
+    flash();
+
+    setTimeout(() => {
+        window.open("https://whatsapp.com/channel/0029Vb69Ttt4SpkFrH03OU0h", "_blank");
+    }, 200);
+}
 </script>
 
 </body>
