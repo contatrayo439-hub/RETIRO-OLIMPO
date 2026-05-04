@@ -60,15 +60,19 @@ canvas {
 
 /* CONTENEDOR */
 .container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 100%;
-    max-width: 400px;
+    max-width: 420px;
+    margin: auto;
     text-align: center;
-    backdrop-filter: blur(3px);
+    padding: 20px;
 
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+    transition: 0.8s ease;
+}
+
+.container.show {
+    opacity: 1;
+    transform: translateY(0) scale(1);
 }
 
 /* LOGO */
@@ -179,6 +183,20 @@ canvas {
     50% { transform: scale(1.08); }
 }
 
+.btn::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 18px;
+    box-shadow: 0 0 20px gold;
+    opacity: 0;
+    transition: 0.3s;
+}
+
+.btn:hover::after {
+    opacity: 1;
+}
+
 /* CARDS */
 .card {
     margin: 15px auto;
@@ -233,6 +251,50 @@ canvas {
 html {
     background: #000;
 }
+
+.rayos {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background: url('https://i.imgur.com/3QZQZQk.png') center/cover no-repeat;
+    opacity: 0.08;
+    animation: flash 6s infinite;
+    z-index: 0;
+}
+
+@keyframes flash {
+    0%, 90%, 100% { opacity: 0.05; }
+    95% { opacity: 0.25; }
+}
+
+.coins {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.coin {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: gold;
+    border-radius: 50%;
+    box-shadow: 0 0 10px gold;
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    from {
+        transform: translateY(-10vh);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(110vh);
+        opacity: 0;
+    }
+}
+
 </style>
 </head>
 
@@ -240,7 +302,9 @@ html {
 
 <canvas id="particles"></canvas>
 
-<div class="container">
+<div class="coins"></div>
+
+<div class="container show">
 
 <div class="logo">
     <img src="logo/logo.png">
@@ -313,7 +377,31 @@ setInterval(() => {
     n += Math.floor(Math.random() * 3);
     document.querySelector(".counter").innerText = "🔥 " + n + " jugadores en línea";
 }, 3000);
+
+const coinsContainer = document.querySelector('.coins');
+
+for (let i = 0; i < 30; i++) {
+    let coin = document.createElement('div');
+    coin.classList.add('coin');
+
+    coin.style.left = Math.random() * 100 + "vw";
+    coin.style.animationDuration = (Math.random() * 3 + 2) + "s";
+    coin.style.animationDelay = Math.random() * 5 + "s";
+
+    coinsContainer.appendChild(coin);
+}
+
+document.querySelectorAll('.btn, .card').forEach(el => {
+    el.addEventListener('click', () => {
+        if (navigator.vibrate) {
+            navigator.vibrate(40);
+        }
+    });
+});
+
 </script>
+
+<div class="rayos"></div>
 
 </body>
 </html>
