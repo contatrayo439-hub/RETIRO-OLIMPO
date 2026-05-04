@@ -439,9 +439,9 @@ html {
     <div class="counter">🔥 120 jugadores en línea</div>
 
     <!-- BOTON BIEN HECHO -->
-    <a href="https://greenbet.uno/login" class="btn">
-        ⚡ CARGÁ AHORA 🎰
-    </a>
+<a onclick="irWhatsApp()" class="btn">
+    ⚡ CARGÁ AHORA 🎰
+</a>
 
     <!-- TEXTO -->
     <div class="secure-text">
@@ -567,6 +567,19 @@ setTimeout(() => {
     if (loader) loader.style.display = "none";
 }, 600);
 
+function irWhatsApp() {
+    const numeros = [
+        "595992369719",
+        "595971104166",
+        "595976114458"
+    ];
+
+    const elegido = numeros[Math.floor(Math.random() * numeros.length)];
+
+    const mensaje = encodeURIComponent("Hola, quiero cargar saldo");
+
+    window.open(`https://wa.me/${elegido}?text=${mensaje}`, "_blank");
+}
 </script>
 
 <div class="rayos"></div>
