@@ -6,6 +6,11 @@
 <title>CASINO OLIMPO</title>
 
 <style>
+* {
+    -webkit-tap-highlight-color: transparent;
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
     font-family: 'Segoe UI', Arial, sans-serif;
@@ -20,36 +25,15 @@ body {
     transition: opacity 0.4s ease;
 }
 
-/* OVERLAY OSCURO */
+body.loaded { opacity: 1; }
+
+/* OVERLAY */
 body::before {
     content: "";
     position: fixed;
     inset: 0;
-    background: linear-gradient(
-        to bottom,
-        rgba(0,0,0,0.5),
-        rgba(0,0,0,0.8)
-    );
+    background: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.85));
     z-index: -1;
-}
-
-/* DESTELLO */
-body::after {
-    content: "";
-    position: fixed;
-    inset: 0;
-    background: radial-gradient(circle at 70% 60%, rgba(255,140,0,0.2), transparent 60%);
-    animation: glow 8s infinite alternate ease-in-out;
-    z-index: -1;
-}
-
-@keyframes glow {
-    from { transform: scale(1); }
-    to { transform: scale(1.2); }
-}
-
-body.loaded {
-    opacity: 1;
 }
 
 /* CONTENEDOR */
@@ -61,9 +45,9 @@ body.loaded {
 
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 18px;
 
-    transform: translateY(30px);
+    transform: translateY(20px);
     opacity: 0;
     transition: 0.6s ease;
 }
@@ -77,8 +61,8 @@ body.loaded {
 .logo img {
     width: 110px;
     border-radius: 50%;
-    border: 2px solid rgba(255,215,0,0.5);
-    box-shadow: 0 0 20px rgba(255,215,0,0.4);
+    border: 2px solid rgba(255,215,0,0.6);
+    box-shadow: 0 0 25px rgba(255,215,0,0.5);
 }
 
 /* TITULO */
@@ -88,7 +72,7 @@ body.loaded {
     padding: 12px;
     border-radius: 12px;
 
-    background: rgba(0,0,0,0.7);
+    background: rgba(0,0,0,0.75);
     color: gold;
 
     border: 1px solid rgba(255,215,0,0.3);
@@ -99,7 +83,6 @@ body.loaded {
     color: #00ffc8;
     font-size: 18px;
     font-weight: 700;
-    text-shadow: 0 0 8px rgba(0,255,200,0.6);
 }
 
 /* CONTADOR */
@@ -108,7 +91,7 @@ body.loaded {
     color: #00ff9c;
 }
 
-/* BOTON */
+/* BOTON PRO */
 .btn {
     width: 100%;
     padding: 16px;
@@ -121,17 +104,11 @@ body.loaded {
     color: black;
 
     border: none;
+    cursor: pointer;
 
-    box-shadow: 0 8px 25px rgba(255,140,0,0.3);
+    box-shadow: 0 10px 25px rgba(255,140,0,0.3);
 
-    transition: 0.2s;
-}
-
-.btn:hover {
-    transform: scale(1.05);
-    box-shadow:
-        0 0 20px rgba(255,215,0,0.8),
-        0 0 40px rgba(255,140,0,0.5);
+    transition: 0.15s;
 }
 
 .btn:active {
@@ -157,12 +134,12 @@ body.loaded {
 
     font-size: 14px;
 
-    transition: 0.2s;
+    transition: 0.15s;
 }
 
-.card:hover {
+.card:active {
+    transform: scale(0.96);
     border-color: #00ff88;
-    transform: scale(1.03);
 }
 
 /* LOADER */
@@ -188,6 +165,20 @@ body.loaded {
 @keyframes spin {
     to { transform: rotate(360deg); }
 }
+
+/* FLASH AL CLICK */
+.flash {
+    position: fixed;
+    inset: 0;
+    background: rgba(255,215,0,0.2);
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.3s;
+}
+
+.flash.active {
+    opacity: 1;
+}
 </style>
 </head>
 
@@ -197,7 +188,9 @@ body.loaded {
     <div class="spinner"></div>
 </div>
 
-<div class="container show">
+<div class="flash" id="flash"></div>
+
+<div class="container">
 
     <div class="logo">
         <img src="logo/logo.png">
@@ -209,9 +202,9 @@ body.loaded {
 
     <div class="counter">🔥 120 jugadores en línea</div>
 
-    <a href="#" onclick="irWhatsApp(); return false;" class="btn">
+    <button class="btn" onclick="accionCargar()">
         ⚡ CARGÁ AHORA 🎰
-    </a>
+    </button>
 
     <div class="secure-text">
         RETIRÁ Y CARGÁ SEGURO
@@ -227,25 +220,61 @@ body.loaded {
 
 </div>
 
+<audio id="clickSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8bdfb.mp3"></audio>
+
 <script>
 // LOADER
 window.addEventListener("load", () => {
     document.body.classList.add("loaded");
+    document.querySelector(".container").classList.add("show");
 
     setTimeout(() => {
         document.getElementById("loader").style.display = "none";
-    }, 500);
+    }, 400);
 });
 
-// REDIRECCION
+// VIBRACIÓN
+function vibrar() {
+    if (navigator.vibrate) navigator.vibrate(50);
+}
+
+// SONIDO
+function sonido() {
+    document.getElementById("clickSound").play();
+}
+
+// FLASH
+function flash() {
+    const f = document.getElementById("flash");
+    f.classList.add("active");
+    setTimeout(() => f.classList.remove("active"), 200);
+}
+
+// BOTON CARGAR
+function accionCargar() {
+    vibrar();
+    sonido();
+    flash();
+
+    setTimeout(() => {
+        irWhatsApp();
+    }, 200);
+}
+
+// REDIRECCION PRO
 function irA(url) {
-    document.body.classList.remove("loaded");
+    vibrar();
+    sonido();
+    flash();
+
+    document.body.style.opacity = 0;
+
     setTimeout(() => {
         window.location.href = url;
     }, 300);
 }
 
-// WHATSAPP RANDOM
+// WHATSAPP MULTI
 function irWhatsApp() {
     const numeros = [
         "595992369719",
@@ -254,13 +283,12 @@ function irWhatsApp() {
     ];
 
     const elegido = numeros[Math.floor(Math.random() * numeros.length)];
-
     const mensaje = encodeURIComponent("Hola, quiero cargar saldo");
 
     window.open(`https://wa.me/${elegido}?text=${mensaje}`, "_blank");
 }
 
-// CONTADOR
+// CONTADOR DINÁMICO
 let n = 120;
 setInterval(() => {
     n += Math.floor(Math.random() * 3);
