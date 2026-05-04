@@ -63,6 +63,14 @@ body::before {
     border-radius: 50%;
     border: 2px solid rgba(255,215,0,0.6);
     box-shadow: 0 0 25px rgba(255,215,0,0.5);
+
+    animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+    100% { transform: translateY(0); }
 }
 
 /* TITULO */
@@ -91,7 +99,7 @@ body::before {
     color: #00ff9c;
 }
 
-/* BOTON PRO */
+/* BOTON */
 .btn {
     width: 100%;
     padding: 16px;
@@ -109,10 +117,30 @@ body::before {
     box-shadow: 0 10px 25px rgba(255,140,0,0.3);
 
     transition: 0.15s;
+
+    position: relative;
+    overflow: hidden;
 }
 
 .btn:active {
     transform: scale(0.95);
+}
+
+/* RIPPLE */
+.btn:active::after {
+    content: "";
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    top: -50%;
+    left: -50%;
+    background: radial-gradient(circle, rgba(255,255,255,0.4), transparent);
+    animation: ripple 0.4s;
+}
+
+@keyframes ripple {
+    from { transform: scale(0); }
+    to { transform: scale(1); opacity: 0; }
 }
 
 /* TEXTO */
@@ -135,11 +163,25 @@ body::before {
     font-size: 14px;
 
     transition: 0.15s;
+
+    position: relative;
+    overflow: hidden;
 }
 
 .card:active {
     transform: scale(0.96);
     border-color: #00ff88;
+}
+
+.card:active::after {
+    content: "";
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    top: -50%;
+    left: -50%;
+    background: radial-gradient(circle, rgba(255,255,255,0.2), transparent);
+    animation: ripple 0.4s;
 }
 
 /* LOADER */
@@ -166,14 +208,14 @@ body::before {
     to { transform: rotate(360deg); }
 }
 
-/* FLASH AL CLICK */
+/* FLASH */
 .flash {
     position: fixed;
     inset: 0;
     background: rgba(255,215,0,0.2);
     opacity: 0;
     pointer-events: none;
-    transition: 0.3s;
+    transition: 0.2s;
 }
 
 .flash.active {
@@ -207,15 +249,15 @@ body::before {
     </button>
 
     <div class="secure-text">
-        RETIRÁ Y CARGÁ SEGURO
+        RETIRÁ Y CARGÁ SEGURO.
     </div>
 
     <div class="card" onclick="irA('cargar.html')">
-        <span>¿CÓMO CARGAR?</span> ➡️
+        <span>¿CÓMO HAGO PARA CARGAR DESDE LA PLATAFORMA?</span> ➡️
     </div>
 
     <div class="card" onclick="irA('retirar.html')">
-        <span>¿CÓMO RETIRAR?</span> ➡️
+        <span>¿CÓMO HAGO PARA RETIRAR MI DINERO?</span> ➡️
     </div>
 
 </div>
@@ -233,24 +275,26 @@ window.addEventListener("load", () => {
     }, 400);
 });
 
-// VIBRACIÓN
+// EFECTOS
 function vibrar() {
-    if (navigator.vibrate) navigator.vibrate(50);
+    if (navigator.vibrate) navigator.vibrate([20,30,20]);
 }
 
-// SONIDO
 function sonido() {
-    document.getElementById("clickSound").play();
+    const audio = document.getElementById("clickSound");
+    if (audio) {
+        audio.currentTime = 0;
+        audio.play().catch(()=>{});
+    }
 }
 
-// FLASH
 function flash() {
     const f = document.getElementById("flash");
     f.classList.add("active");
-    setTimeout(() => f.classList.remove("active"), 200);
+    setTimeout(() => f.classList.remove("active"), 150);
 }
 
-// BOTON CARGAR
+// BOTON
 function accionCargar() {
     vibrar();
     sonido();
@@ -261,7 +305,7 @@ function accionCargar() {
     }, 200);
 }
 
-// REDIRECCION PRO
+// REDIRECCION
 function irA(url) {
     vibrar();
     sonido();
@@ -288,7 +332,7 @@ function irWhatsApp() {
     window.open(`https://wa.me/${elegido}?text=${mensaje}`, "_blank");
 }
 
-// CONTADOR DINÁMICO
+// CONTADOR
 let n = 120;
 setInterval(() => {
     n += Math.floor(Math.random() * 3);
