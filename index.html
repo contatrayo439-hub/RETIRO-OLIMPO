@@ -25,7 +25,7 @@ body::before {
     position: fixed;
     inset: 0;
     background: rgba(0,0,0,0.65); /* OSCURECE FONDO */
-    z-index: -2;
+    z-index: -1;
 }
 
 @keyframes moveGlow {
@@ -87,9 +87,23 @@ canvas {
 }
 
 .logo img {
-    width: 140px;
+    width: 120px;
+    margin-top: 20px;
+
     border-radius: 50%;
-    position: relative;
+    border: 2px solid gold;
+
+    box-shadow:
+        0 0 15px gold,
+        0 0 40px rgba(255,215,0,0.6);
+
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+    100% { transform: translateY(0); }
 }
 
 /* ARO */
@@ -115,12 +129,14 @@ canvas {
 
 /* TITULO */
 .title {
-    font-size: 42px;
-    font-weight: 900;
-    letter-spacing: 2px;
+    font-size: 34px;
+    font-weight: 800;
+    letter-spacing: 1px;
     padding: 14px 30px;
     border-radius: 16px;
     display: inline-block;
+
+    margin-top: 15px;
 
     background: rgba(0,0,0,0.75);
 
@@ -134,14 +150,16 @@ canvas {
         inset 0 0 10px rgba(255,255,255,0.15);
 
     text-shadow:
-        0 0 10px rgba(255,215,0,0.8),
-        0 0 25px rgba(255,140,0,0.6);
+    0 0 10px rgba(255,215,0,0.7);
 }
 
 /* SUB */
 .subtitle {
+    color: #00ffc8;
     font-size: 32px;
-    font-weight: 900;
+    font-weight: 600;
+    margin-top: 5px;
+
 
     background: linear-gradient(90deg, #00ff88, #ffd700);
     -webkit-background-clip: text;
@@ -153,7 +171,7 @@ canvas {
 
             color: #00ffcc;
     font-weight: bold;
-    text-shadow: 0 0 10px rgba(0,255,200,0.5);
+    text-shadow: 0 0 8px rgba(0,255,200,0.4);
 }
 
 /* CONTADOR */
@@ -170,27 +188,29 @@ canvas {
 
 /* BOTON */
 .btn {
-    position: relative;
     display: block;
-    width: 85%;
-    max-width: 340px;
-    margin: 20px auto;
-    padding: 18px;
-    border-radius: 14px;
-    font-weight: bold;
+    width: 100%;
+    margin: 25px auto;
+    padding: 16px;
+
+    border-radius: 12px;
+
+    font-size: 16px;
+    font-weight: 700;
+
     text-decoration: none;
     color: black;
 
     background: linear-gradient(90deg, #ffd700, #ff8c00);
 
     box-shadow:
-        0 0 10px rgba(255,215,0,0.6),
-        0 0 20px rgba(255,140,0,0.4);
+        0 5px 15px rgba(255,140,0,0.4);
 
-    animation: pulse 2s infinite;
+    transition: 0.2s;
+}
 
-    backdrop-filter: blur(2px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+.btn:active {
+    transform: scale(0.97);
 }
 
 .btn:hover {
@@ -274,29 +294,27 @@ canvas {
 
 /* CARDS */
 .card {
-    margin: 15px auto;
-    width: 90%;
-    max-width: 360px;
-    padding: 18px;
+    width: 100%;
+    margin: 12px auto;
+    padding: 14px;
 
-    border-radius: 16px;
+    border-radius: 12px;
 
     background: rgba(0,0,0,0.7);
-    backdrop-filter: blur(4px);
-
-    border: 2px solid rgba(255,140,0,0.4);
-
-    color: white;
+    border: 1px solid rgba(255,255,255,0.1);
 
     display: flex;
     justify-content: space-between;
     align-items: center;
 
-    box-shadow:
-        0 0 12px rgba(255,140,0,0.5),
-        inset 0 0 5px rgba(255,255,255,0.1);
+    font-size: 14px;
 
-    transition: 0.3s;
+    transition: 0.2s;
+}
+
+.card:active {
+    transform: scale(0.97);
+    border-color: gold;
 }
 
 .card:hover {
@@ -415,6 +433,10 @@ html {
     transform: scale(0.95);
 }
 
+* {
+    -webkit-tap-highlight-color: transparent;
+}
+
 </style>
 </head>
 <div id="loader">
@@ -491,7 +513,7 @@ function animate() {
             p.x = Math.random() * canvas.width;
         }
 
-        ctx.fillStyle = `rgba(255,215,0,${p.opacity})`;
+        ctx.fillStyle = "rgba(255,215,0,0.4)";
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
         ctx.fill();
