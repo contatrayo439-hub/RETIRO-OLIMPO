@@ -9,7 +9,7 @@ body {
     margin: 0;
     background: black;
     text-align: center;
-    opacity: 0;
+    opacity: 1;
     transition: opacity 0.4s ease;
 }
 
@@ -121,6 +121,12 @@ img {
 
 <!-- IMAGEN -->
 <img src="como cargar.png">
+
+<script>
+setTimeout(() => {
+    document.body.classList.add("loaded");
+}, 100);
+</script>
 
 </body>
 </html>
