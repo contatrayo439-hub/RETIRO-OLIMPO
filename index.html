@@ -67,6 +67,8 @@ canvas {
     width: 100%;
     max-width: 400px;
     text-align: center;
+    backdrop-filter: blur(3px);
+
 }
 
 /* LOGO */
@@ -103,17 +105,29 @@ canvas {
 
 /* TITULO */
 .title {
-    font-size: 38px;
-    margin: 20px 0;
-    font-weight: bold;
-    color: gold;
-    text-shadow: 0 0 15px orange;
+    font-size: 48px;
+    font-weight: 900;
+    letter-spacing: 2px;
+
+    background: linear-gradient(180deg, #fff, gold, #ff8c00);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    text-shadow:
+        0 0 10px rgba(255,215,0,0.8),
+        0 0 25px rgba(255,140,0,0.6),
+        0 0 40px rgba(255,140,0,0.4);
 }
 
 /* SUB */
 .subtitle {
-    color: #00e5ff;
-    margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #00eaff;
+
+    text-shadow:
+        0 0 10px rgba(0,255,255,0.7),
+        0 0 20px rgba(0,200,255,0.5);
 }
 
 /* CONTADOR */
@@ -131,17 +145,34 @@ canvas {
 /* BOTON */
 .btn {
     display: block;
-    width: 85%;
-    max-width: 340px;
-    margin: 20px auto;
-    padding: 18px;
-    border-radius: 14px;
-    font-weight: bold;
-    text-decoration: none;
+    width: 90%;
+    max-width: 360px;
+    margin: 25px auto;
+    padding: 20px;
+    border-radius: 18px;
+
+    font-size: 18px;
+    font-weight: 900;
+    letter-spacing: 1px;
+
     color: black;
-    background: linear-gradient(90deg, #ffcc00, #ff6f00);
-    box-shadow: 0 0 25px rgba(255,140,0,0.7);
-    animation: pulseBtn 1.8s infinite;
+    text-decoration: none;
+
+    background: linear-gradient(135deg, gold, #ff8c00);
+    box-shadow:
+        0 0 20px rgba(255,165,0,0.8),
+        0 0 40px rgba(255,140,0,0.6),
+        inset 0 0 10px rgba(255,255,255,0.4);
+
+    transition: 0.3s;
+}
+
+/* HOVER */
+.btn:hover {
+    transform: scale(1.08);
+    box-shadow:
+        0 0 30px rgba(255,215,0,1),
+        0 0 60px rgba(255,140,0,0.9);
 }
 
 @keyframes pulseBtn {
@@ -151,15 +182,38 @@ canvas {
 /* CARDS */
 .card {
     margin: 15px auto;
-    width: 85%;
-    max-width: 340px;
-    padding: 14px;
-    border-radius: 12px;
-    border: 1px solid rgba(255,255,255,0.2);
+    width: 90%;
+    max-width: 360px;
+    padding: 16px;
+
+    border-radius: 14px;
+
     display: flex;
     justify-content: space-between;
+    align-items: center;
+
     cursor: pointer;
-    background: rgba(255,255,255,0.05);
+
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(8px);
+
+    border: 1px solid rgba(255,215,0,0.3);
+
+    box-shadow:
+        0 0 10px rgba(255,215,0,0.3),
+        inset 0 0 5px rgba(255,255,255,0.1);
+
+    transition: 0.3s;
+}
+
+/* HOVER */
+.card:hover {
+    transform: scale(1.05);
+    border-color: gold;
+
+    box-shadow:
+        0 0 20px gold,
+        0 0 40px rgba(255,140,0,0.6);
 }
 
 /* WHATSAPP */
