@@ -22,7 +22,7 @@ body::before {
     content: "";
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.6); /* oscurece fondo */
+    background: rgba(0,0,0,0.75); /* oscurece fondo */
     z-index: -1;
 }
 
@@ -109,38 +109,38 @@ canvas {
 
 /* TITULO */
 .title {
-    font-size: 36px;
+    font-size: 42px;
     font-weight: 900;
-    margin: 20px auto;
-    padding: 10px 20px;
+    letter-spacing: 2px;
+
+    padding: 14px 30px;
+    border-radius: 16px;
 
     display: inline-block;
 
+    background: linear-gradient(145deg, #000, #0a0a0a);
     color: white;
-
-    background: linear-gradient(145deg, #111, #000);
-    border-radius: 12px;
 
     border: 2px solid #ff8c00;
 
     box-shadow:
-        0 0 10px #ff8c00,
-        0 0 20px rgba(255,140,0,0.6),
-        inset 0 0 10px rgba(255,255,255,0.1);
+        0 0 20px #ff8c00,
+        0 0 50px rgba(255,140,0,0.7),
+        inset 0 0 10px rgba(255,255,255,0.15);
 }
 
 /* SUB */
 .subtitle {
-    font-size: 28px;
+    font-size: 32px;
     font-weight: 900;
 
-    background: linear-gradient(90deg, #fff, #ffcc00, #00ff88);
+    background: linear-gradient(90deg, #00ff88, #ffd700);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 
     text-shadow:
-        0 0 10px rgba(255,215,0,0.6),
-        0 0 20px rgba(0,255,136,0.4);
+        0 0 20px rgba(0,255,136,0.7),
+        0 0 30px rgba(255,215,0,0.6);
 }
 
 /* CONTADOR */
@@ -161,23 +161,28 @@ canvas {
     width: 90%;
     max-width: 360px;
     margin: 25px auto;
-    padding: 20px;
-    border-radius: 18px;
+    padding: 22px;
 
-    font-size: 18px;
+    border-radius: 20px;
+
+    font-size: 20px;
     font-weight: 900;
-    letter-spacing: 1px;
 
+    background: linear-gradient(135deg, #ffd700, #ff8c00);
     color: black;
-    text-decoration: none;
 
-    background: linear-gradient(135deg, gold, #ff8c00);
+    border: none;
+
     box-shadow:
-        0 0 20px rgba(255,165,0,0.8),
-        0 0 40px rgba(255,140,0,0.6),
-        inset 0 0 10px rgba(255,255,255,0.4);
+        0 0 25px rgba(255,215,0,1),
+        0 0 60px rgba(255,140,0,0.8),
+        inset 0 0 12px rgba(255,255,255,0.6);
 
     transition: 0.3s;
+}
+
+.btn:hover {
+    transform: scale(1.1);
 }
 
 /* HOVER */
@@ -211,34 +216,36 @@ canvas {
     margin: 15px auto;
     width: 90%;
     max-width: 360px;
-    padding: 16px;
+    padding: 18px;
 
-    border-radius: 12px;
+    border-radius: 16px;
+
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(6px);
+
+    border: 2px solid rgba(255,140,0,0.4);
+
+    color: white;
 
     display: flex;
     justify-content: space-between;
     align-items: center;
 
-    cursor: pointer;
-
-    background: linear-gradient(145deg, #111, #000);
-
-    border: 2px solid rgba(255,140,0,0.5);
-
     box-shadow:
-        0 0 10px rgba(255,140,0,0.5),
+        0 0 12px rgba(255,140,0,0.5),
         inset 0 0 5px rgba(255,255,255,0.1);
 
     transition: 0.3s;
 }
 
 .card:hover {
-    transform: scale(1.05);
     border-color: #00ff88;
 
     box-shadow:
-        0 0 20px #00ff88,
-        0 0 40px rgba(0,255,136,0.6);
+        0 0 25px #00ff88,
+        0 0 50px rgba(0,255,136,0.6);
+
+    transform: scale(1.05);
 }
 
 /* WHATSAPP */
@@ -302,13 +309,15 @@ html {
     }
 }
 .secure-text {
-    font-size: 16px;
+    font-size: 18px;
+    font-weight: bold;
     margin-top: 10px;
 
     color: #00ff88;
 
     text-shadow:
-        0 0 10px rgba(0,255,136,0.6);
+        0 0 10px rgba(0,255,136,0.8),
+        0 0 20px rgba(0,255,136,0.5);
 }
 
 </style>
@@ -318,34 +327,37 @@ html {
 
 <canvas id="particles"></canvas>
 
-<div class="secure-text">
-RETIRÁ Y CARGÁ SEGURO
-</div>
-
 <div class="coins"></div>
 
 <div class="container show">
 
-<div class="logo">
-    <img src="logo/logo.png">
-</div>
+    <div class="logo">
+        <img src="logo/logo.png">
+    </div>
 
-<div class="title">PLATAFORMA</div>
-<div class="subtitle">RÁPIDO Y SEGURO</div>
+    <div class="title">PLATAFORMA</div>
+    <div class="subtitle">RÁPIDO Y SEGURO</div>
 
-<div class="counter">🔥 120 jugadores en línea</div>
+    <div class="counter">🔥 120 jugadores en línea</div>
 
-<a href="https://greenbet.uno/login" class="btn">
-⚡ CARGÁ AHORA 🎰
-</a>
+    <!-- BOTON BIEN HECHO -->
+    <a href="https://greenbet.uno/login" class="btn">
+        ⚡ CARGÁ AHORA 🎰
+    </a>
 
-<div class="card" onclick="window.location.href='cargar.html'">
-<span>¿CÓMO HAGO PARA CARGAR DESDE LA PLATAFORMA?</span> ➡️
-</div>
+    <!-- TEXTO -->
+    <div class="secure-text">
+        RETIRÁ Y CARGÁ SEGURO
+    </div>
 
-<div class="card" onclick="window.location.href='retirar.html'">
-<span>¿CÓMO HAGO PARA RETIRAR MI DINERO?</span> ➡️
-</div>
+    <!-- CARDS -->
+    <div class="card" onclick="window.location.href='cargar.html'">
+        <span>¿CÓMO HAGO PARA CARGAR DESDE LA PLATAFORMA?</span> ➡️
+    </div>
+
+    <div class="card" onclick="window.location.href='retirar.html'">
+        <span>¿CÓMO HAGO PARA RETIRAR MI DINERO?</span> ➡️
+    </div>
 
 </div>
 
