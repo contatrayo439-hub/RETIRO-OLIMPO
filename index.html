@@ -13,8 +13,8 @@ body {
     min-height: 100vh;
     overflow: hidden;
 
-    /* 🔥 FONDO ANIMADO */
-    background: radial-gradient(circle at 30% 30%, #0a0f2c, #000);
+    background: url('fondo.png') no-repeat center center;
+    background-size: cover;
 }
 
 /* ✨ GRADIENTE EN MOVIMIENTO */
@@ -22,9 +22,8 @@ body::before {
     content: "";
     position: fixed;
     inset: 0;
-    background: radial-gradient(circle at 70% 60%, rgba(255,140,0,0.25), transparent 60%);
-    animation: moveGlow 8s infinite alternate ease-in-out;
-    z-index: -2;
+    background: rgba(0,0,0,0.6); /* oscurece fondo */
+    z-index: -1;
 }
 
 @keyframes moveGlow {
@@ -41,9 +40,9 @@ body::after {
     content: "";
     position: fixed;
     inset: 0;
-    background: repeating-radial-gradient(circle, rgba(255,215,0,0.05) 0px, transparent 2px);
-    animation: sparkle 6s linear infinite;
-    z-index: -3;
+    background: radial-gradient(circle at 70% 60%, rgba(255,140,0,0.25), transparent 60%);
+    animation: moveGlow 8s infinite alternate ease-in-out;
+    z-index: -2;
 }
 
 @keyframes sparkle {
