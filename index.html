@@ -248,6 +248,49 @@ body::before {
 .whatsapp-channel:active {
     transform: scale(0.95);
 }
+
+.jugar {
+    background: linear-gradient(90deg, #00ffcc, #00cc99);
+    color: black;
+    flex: 1.2;
+
+    font-size: 14px;
+    font-weight: 900;
+
+    box-shadow: 
+        0 0 15px rgba(0,255,200,0.5),
+        0 0 30px rgba(0,255,200,0.3);
+
+    animation: glowJuego 2s infinite alternate;
+}
+
+@keyframes glowJuego {
+    from {
+        box-shadow: 0 0 10px rgba(0,255,200,0.4);
+    }
+    to {
+        box-shadow: 0 0 30px rgba(0,255,200,1);
+    }
+}
+
+.btn-group {
+    display: flex;
+    gap: 12px;
+}
+
+.btn-group .btn {
+    letter-spacing: 0.5px;
+    flex: 1;
+    padding: 14px;
+    font-size: 14px;
+}
+.btn-group .btn:active {
+    transform: scale(0.94);
+}
+
+.cargar {
+    font-size: 14px;
+}
 </style>
 </head>
 
@@ -271,9 +314,15 @@ body::before {
 
     <div class="counter">🔥 120 jugadores en línea</div>
 
-    <button class="btn" onclick="accionCargar()">
-        ⚡ CARGÁ AHORA 🎰
+<div class="btn-group">
+    <button class="btn jugar" onclick="irJuego()">
+        🎰 JUGAR AHORA
     </button>
+
+    <button class="btn cargar" onclick="accionCargar()">
+        ⚡ CARGAR AHORA
+    </button>
+</div>
 
     <div class="secure-text">
         RETIRÁ Y CARGÁ SEGURO.
@@ -379,6 +428,17 @@ function irCanal() {
         window.open("https://whatsapp.com/channel/0029Vb69Ttt4SpkFrH03OU0h", "_blank");
     }, 200);
 }
+
+function irJuego() {
+    vibrar();
+    sonido();
+    flash();
+
+    setTimeout(() => {
+        window.open("https://greenbet.uno/login", "_blank");
+    }, 200);
+}
+
 </script>
 
 </body>
