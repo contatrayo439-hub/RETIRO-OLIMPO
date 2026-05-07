@@ -466,6 +466,254 @@ body::before {
     transform: scale(0.95);
 }
 
+/* INFO BUTTONS */
+
+.info-btn {
+    width: 100%;
+
+    margin-top: 16px;
+    padding: 18px 22px;
+
+    border-radius: 24px;
+
+    background: rgba(0, 0, 0, 0.35);
+
+    border: 2px solid rgba(255, 215, 0, 0.25);
+
+    backdrop-filter: blur(10px);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    cursor: pointer;
+
+    position: relative;
+    overflow: hidden;
+
+    transition: 0.25s;
+
+    box-shadow:
+        0 0 15px rgba(255,215,0,0.15),
+        inset 0 0 12px rgba(255,255,255,0.03);
+}
+
+/* EFECTO GLASS */
+
+.info-btn::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: -120%;
+
+    width: 100%;
+    height: 100%;
+
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,0.08),
+        transparent
+    );
+
+    transition: 0.6s;
+}
+
+.info-btn:hover::before {
+    left: 120%;
+}
+
+.info-btn:hover {
+    transform: scale(1.02);
+
+    border-color: gold;
+
+    box-shadow:
+        0 0 25px rgba(255,215,0,0.35),
+        0 0 40px rgba(255,180,0,0.12);
+}
+
+/* IZQUIERDA */
+
+.info-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    text-align: left;
+}
+
+/* TEXTO */
+
+.info-left span {
+    color: white;
+
+    font-size: 20px;
+    font-weight: 700;
+
+    line-height: 1.2;
+
+    text-shadow:
+        0 0 8px rgba(255,255,255,0.12);
+}
+
+/* ICONO CIRCULAR */
+
+.icon-circle {
+    min-width: 64px;
+    height: 64px;
+
+    border-radius: 50%;
+
+    background: rgba(255, 200, 0, 0.12);
+
+    border: 2px solid rgba(255,215,0,0.45);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    backdrop-filter: blur(6px);
+
+    box-shadow:
+        0 0 18px rgba(255,215,0,0.35),
+        inset 0 0 12px rgba(255,255,255,0.05);
+}
+
+/* ICONOS */
+
+.icon-circle i {
+    font-size: 30px;
+
+    color: gold;
+
+    text-shadow:
+        0 0 12px rgba(255,215,0,0.7);
+}
+
+/* FLECHA */
+
+.arrow-box {
+    min-width: 56px;
+    height: 56px;
+
+    border-radius: 16px;
+
+    background: rgba(255, 200, 0, 0.08);
+
+    border: 2px solid rgba(255,215,0,0.3);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-shadow:
+        0 0 15px rgba(255,215,0,0.2);
+}
+
+/* ICONO FLECHA */
+
+.arrow-box i {
+    font-size: 24px;
+
+    color: gold;
+
+    text-shadow:
+        0 0 10px rgba(255,215,0,0.6);
+}
+
+/* WHATSAPP */
+
+.whatsapp-channel {
+    margin-top: 8px;
+
+    padding: 18px;
+
+    border-radius: 24px;
+
+    background: linear-gradient(135deg, #00c853, #009624);
+
+    display: flex;
+    align-items: center;
+    gap: 18px;
+
+    cursor: pointer;
+
+    transition: 0.25s;
+
+    box-shadow:
+        0 0 25px rgba(0,255,120,0.35);
+}
+
+.whatsapp-channel:hover {
+    transform: scale(1.02);
+}
+
+.whatsapp-icon {
+    min-width: 70px;
+    height: 70px;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,0.12);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.whatsapp-icon i {
+    font-size: 42px;
+    color: white;
+}
+
+.whatsapp-text {
+    text-align: left;
+
+    font-size: 20px;
+    font-weight: 700;
+
+    line-height: 1.2;
+
+    color: white;
+}
+
+.whatsapp-text span {
+    color: #8dff5f;
+}
+
+.logo-glow {
+    width: 180px;
+    height: 12px;
+
+    margin: -5px auto 5px auto;
+
+    border-radius: 50%;
+
+    background: radial-gradient(circle,
+        rgba(255,215,0,0.85),
+        rgba(255,180,0,0.35),
+        transparent);
+
+    filter: blur(10px);
+
+    animation: pulseGlow 2s infinite alternate;
+}
+
+@keyframes pulseGlow {
+    from {
+        opacity: 0.6;
+        transform: scaleX(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scaleX(1.1);
+    }
+}
+
 </style>
 </head>
 
@@ -483,9 +731,7 @@ body::before {
         <img src="logo/logo.png">
     </div>
 
-    <div class="title">
-    PLATAFORMA
-    </div>
+    <div class="logo-glow"></div>
 
     <div class="subtitle">⚡ RÁPIDO Y SEGURO ⚡</div>
 
@@ -522,16 +768,57 @@ body::before {
         🛡️ RETIRÁ Y CARGÁ SEGURO
     </div>
 
-    <div class="card" onclick="irA('cargar.html')">
-        <span>❓ ¿CÓMO HAGO PARA CARGAR DESDE LA PLATAFORMA?</span> ➡️
+<div class="info-btn" onclick="irA('cargar.html')">
+
+    <div class="info-left">
+
+        <div class="icon-circle">
+            <i class="fa-solid fa-circle-question"></i>
+        </div>
+
+        <span>
+            ¿CÓMO HAGO PARA CARGAR DESDE LA PLATAFORMA?
+        </span>
+
     </div>
 
-    <div class="card" onclick="irA('retirar.html')">
-        <span>💸 ¿CÓMO HAGO PARA RETIRAR MI DINERO?</span> ➡️
+    <div class="arrow-box">
+        <i class="fa-solid fa-arrow-right"></i>
     </div>
 
-    <div class="whatsapp-channel" onclick="irCanal()">
-    🟢 No olvides unirte a nuestro canal oficial de WhatsApp
+</div>
+
+<div class="info-btn" onclick="irA('retirar.html')">
+
+    <div class="info-left">
+
+        <div class="icon-circle money">
+            <i class="fa-solid fa-money-bill-wave"></i>
+        </div>
+
+        <span>
+            ¿CÓMO HAGO PARA RETIRAR MI DINERO?
+        </span>
+
+    </div>
+
+    <div class="arrow-box">
+        <i class="fa-solid fa-arrow-right"></i>
+    </div>
+
+</div>
+
+<div class="whatsapp-channel" onclick="irCanal()">
+
+    <div class="whatsapp-icon">
+        <i class="fa-brands fa-whatsapp"></i>
+    </div>
+
+    <div class="whatsapp-text">
+        No olvides unirte a nuestro canal oficial de
+        <span>WhatsApp</span>
+    </div>
+
 </div>
 
 </div>
