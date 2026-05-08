@@ -1,131 +1,479 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Cómo cargar</title>
 
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+
 <style>
-body {
-    margin: 0;
-    background: black;
-    text-align: center;
-    opacity: 1;
-    transition: opacity 0.4s ease;
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    -webkit-tap-highlight-color: transparent;
 }
 
-body.loaded {
-    opacity: 1;
+body{
+    font-family:'Poppins',sans-serif;
+
+    background:black;
+
+    overflow-x:hidden;
+
+    opacity:0;
+    transition:0.4s ease;
+}
+
+body.loaded{
+    opacity:1;
+}
+
+/* OVERLAY */
+
+body::before{
+    content:"";
+
+    position:fixed;
+    inset:0;
+
+    background:
+    linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.35),
+        rgba(0,0,0,0.82)
+    );
+
+    z-index:-2;
+}
+
+/* PARTICULAS */
+
+.particles{
+    position:fixed;
+    inset:0;
+
+    pointer-events:none;
+
+    background-image:
+    radial-gradient(rgba(255,215,0,0.3) 1px, transparent 1px);
+
+    background-size:35px 35px;
+
+    opacity:0.16;
+
+    animation:particlesMove 18s linear infinite;
+
+    z-index:-1;
+}
+
+@keyframes particlesMove{
+
+    from{
+        transform:translateY(0);
+    }
+
+    to{
+        transform:translateY(-120px);
+    }
+
+}
+
+/* CONTENEDOR */
+
+.container{
+    width:100%;
+    max-width:600px;
+
+    margin:auto;
+
+    padding:80px 14px 30px;
 }
 
 /* IMAGEN */
-img {
-    width: 100%;
-    height: auto;
+
+.guia-img{
+    width:100%;
+
+    border-radius:28px;
+
+    border:2px solid rgba(255,215,0,0.22);
+
+    box-shadow:
+        0 0 25px rgba(255,215,0,0.12),
+        0 0 60px rgba(255,180,0,0.08);
+
+    animation:fadeUp 0.7s ease;
+
+    transition:0.35s ease;
+
+    position:relative;
+
+    animation:
+       fadeUp 0.7s ease,
+       glowImage 2s infinite alternate;
+}
+
+@keyframes glowImage{
+
+    from{
+        box-shadow:
+        0 0 20px rgba(255,180,0,0.12),
+        0 0 40px rgba(255,180,0,0.05);
+    }
+
+    to{
+        box-shadow:
+        0 0 30px rgba(255,180,0,0.25),
+        0 0 70px rgba(255,180,0,0.12);
+    }
+
+}
+
+.guia-img:hover{
+    transform:scale(1.01);
+}
+
+/* ANIMACION */
+
+@keyframes fadeUp{
+
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
 }
 
 /* BOTON VOLVER */
-.volver {
-    position: fixed;
-    top: 15px;
-    left: 15px;
-    background: gold;
-    color: black;
-    padding: 10px 15px;
-    border-radius: 10px;
-    font-weight: bold;
-    text-decoration: none;
-    z-index: 1000;
-}
 
-/* BOTON WHATSAPP */
-.whatsapp {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: #25D366;
-    color: white;
-    padding: 15px;
-    border-radius: 50%;
-    font-size: 20px;
-    text-decoration: none;
-    box-shadow: 0 0 15px rgba(0,0,0,0.6);
-}
-.btn-volver {
-    position: fixed;
-    top: 15px;
-    left: 15px;
+.btn-volver{
+    position:fixed;
 
-    width: 50px;
-    height: 50px;
+    top:18px;
+    left:18px;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width:58px;
+    height:58px;
 
-    font-size: 20px;
-    font-weight: bold;
+    border-radius:50%;
 
-    color: black;
-    text-decoration: none;
+    display:flex;
+    align-items:center;
+    justify-content:center;
 
-    border-radius: 50%;
+    text-decoration:none;
 
-    background: linear-gradient(135deg, #ffd700, #ff8c00);
+    color:white;
+
+    font-size:24px;
+
+    background:
+rgba(0,255,120,0.12);
+
+backdrop-filter:blur(10px);
+
+border:2px solid rgba(0,255,120,0.22);
 
     box-shadow:
-        0 0 15px gold,
-        0 0 40px orange,
-        inset 0 0 8px rgba(255,255,255,0.6);
+        0 0 20px rgba(255,215,0,0.5),
+        0 0 45px rgba(255,140,0,0.22);
 
-    z-index: 999;
+    z-index:999;
 
-    transition: 0.3s;
+    overflow:hidden;
+
+    transition:0.25s ease;
 }
 
 /* BRILLO */
-.btn-volver::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: 50%;
-    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.7), transparent);
-    opacity: 0;
+
+.btn-volver::before{
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:-120%;
+
+    width:100%;
+    height:100%;
+
+    background:linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,0.35),
+        transparent
+    );
+
+    transition:0.6s;
 }
 
-.btn-volver:hover::before {
-    opacity: 1;
-    animation: shine 0.5s;
-}
-
-@keyframes shine {
-    from { transform: translateX(-100%); }
-    to { transform: translateX(100%); }
+.btn-volver:hover::before{
+    left:120%;
 }
 
 /* HOVER */
-.btn-volver:hover {
-    transform: scale(1.1);
-    box-shadow:
-        0 0 25px gold,
-        0 0 60px orange;
+
+.btn-volver:hover{
+    transform:scale(1.08);
 }
+
+/* SOPORTE */
+
+.support-btn{
+    position:fixed;
+
+    bottom:22px;
+    right:22px;
+
+    width:68px;
+    height:68px;
+
+    border-radius:50%;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:
+    linear-gradient(
+        135deg,
+        #00c853,
+        #009624
+    );
+
+    color:white;
+
+    font-size:30px;
+
+    cursor:pointer;
+
+    z-index:999;
+
+    box-shadow:
+        0 0 22px rgba(0,255,120,0.35);
+
+    animation:pulseSupport 2s infinite;
+}
+
+@keyframes pulseSupport{
+
+    0%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.08);
+    }
+
+    100%{
+        transform:scale(1);
+    }
+
+}
+
+/* MOBILE */
+
+@media(max-width:480px){
+
+    .btn-volver{
+        width:52px;
+        height:52px;
+
+        font-size:20px;
+    }
+
+    .support-btn{
+        width:58px;
+        height:58px;
+
+        font-size:24px;
+    }
+
+}
+
+/* TOP CARD */
+
+.top-card{
+    display:flex;
+    align-items:center;
+    gap:16px;
+
+    margin-bottom:20px;
+
+    padding:18px;
+
+    border-radius:24px;
+
+    background:rgba(0,0,0,0.42);
+
+    border:2px solid rgba(255,180,0,0.18);
+
+    backdrop-filter:blur(10px);
+
+    box-shadow:
+        0 0 22px rgba(255,180,0,0.08);
+}
+
+/* ICONO */
+
+.top-icon{
+    min-width:72px;
+    height:72px;
+
+    border-radius:22px;
+
+    background:
+    linear-gradient(
+        135deg,
+        #ffcc00,
+        #ff9500
+    );
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    box-shadow:
+        0 0 22px rgba(255,180,0,0.35);
+}
+
+.top-icon i{
+    font-size:34px;
+    color:white;
+}
+
+/* TEXTO */
+
+.top-text{
+    text-align:left;
+}
+
+.top-text h2{
+    font-size:26px;
+    font-weight:900;
+
+    color:white;
+}
+
+.top-text p{
+    margin-top:4px;
+
+    color:#bbbbbb;
+
+    font-size:15px;
+}
+
+.tip-box{
+    margin-top:18px;
+
+    padding:16px;
+
+    border-radius:20px;
+
+    background:
+    rgba(0,0,0,0.45);
+
+    border:1px solid rgba(255,180,0,0.18);
+
+    color:#ffcc00;
+
+    font-weight:700;
+
+    font-size:15px;
+
+    box-shadow:
+        0 0 18px rgba(255,180,0,0.08);
+
+    backdrop-filter:blur(8px);
+}
+
 </style>
 </head>
 
 <body>
 
-<!-- BOTON VOLVER -->
-<a href="index.html" class="btn-volver fijo">
-    ⬅
+<div class="particles"></div>
+
+<a href="index.html" class="btn-volver">
+    <i class="fa-solid fa-arrow-left"></i>
 </a>
 
-<!-- IMAGEN -->
-<img src="como cargar.png">
+<div class="support-btn" onclick="irWhatsApp()">
+    <i class="fa-solid fa-headset"></i>
+</div>
+
+<div class="container">
+
+    <div class="top-card">
+
+    <div class="top-icon">
+        <i class="fa-solid fa-bolt"></i>
+    </div>
+
+    <div class="top-text">
+
+        <h2>GUÍA DE CARGA</h2>
+
+        <p>
+            Cargá saldo rápido y seguro
+        </p>
+
+    </div>
+
+</div>
+
+    <img src="como cargar.png"
+    class="guia-img">
+
+    <div class="tip-box">
+    ⚡ Consejo: verificá bien el comprobante antes de enviar
+</div>
+
+</div>
 
 <script>
-setTimeout(() => {
+
+window.addEventListener("load", ()=>{
+
     document.body.classList.add("loaded");
-}, 100);
+
+});
+
+/* WHATSAPP */
+
+function irWhatsApp(){
+
+    const numeros = [
+        "595992369719",
+        "595971104166",
+        "595976114458"
+    ];
+
+    const elegido =
+    numeros[Math.floor(Math.random()*numeros.length)];
+
+    const mensaje =
+    encodeURIComponent("Hola, necesito ayuda para cargar saldo");
+
+    window.open(
+    `https://wa.me/${elegido}?text=${mensaje}`,
+    "_blank");
+
+}
+
 </script>
 
 </body>
