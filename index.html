@@ -77,13 +77,31 @@ radial-gradient(
     box-shadow: 0 0 25px rgba(255,215,0,0.5);
     backdrop-filter: blur(4px);
 
-    animation: float 4s ease-in-out infinite;
+    animation:
+    float 4s ease-in-out infinite,
+    logoGlow 2s infinite alternate;
 }
 
 @keyframes float {
     0% { transform: translateY(0); }
     50% { transform: translateY(-8px); }
     100% { transform: translateY(0); }
+}
+
+@keyframes logoGlow {
+
+    from {
+        box-shadow:
+            0 0 15px rgba(255,215,0,0.4),
+            0 0 30px rgba(255,215,0,0.15);
+    }
+
+    to {
+        box-shadow:
+            0 0 30px rgba(255,215,0,0.9),
+            0 0 60px rgba(255,180,0,0.3);
+    }
+
 }
 
 /* TITULO */
@@ -148,6 +166,7 @@ radial-gradient(
     justify-content: center;
     gap: 8px;
     min-width: 260px;
+    transition: 0.25s;
 
     padding: 12px 22px;
 
@@ -814,10 +833,103 @@ radial-gradient(
 
 }
 
+.particles {
+    position: fixed;
+    inset: 0;
+
+    pointer-events: none;
+
+    background-image:
+        radial-gradient(rgba(255,215,0,0.35) 1px, transparent 1px);
+
+    background-size: 35px 35px;
+
+    opacity: 0.18;
+
+    animation: particlesMove 18s linear infinite;
+
+    z-index: -1;
+}
+
+@keyframes particlesMove {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(-120px);
+    }
+}
+
+.support-btn {
+    position: fixed;
+
+    bottom: 22px;
+    right: 22px;
+
+    width: 68px;
+    height: 68px;
+
+    border-radius: 50%;
+
+    background: linear-gradient(135deg, #ffcc00, #ff9500);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 30px;
+    color: black;
+
+    cursor: pointer;
+
+    z-index: 999;
+
+    box-shadow:
+        0 0 20px rgba(255,180,0,0.5);
+
+    animation: pulseSupport 2s infinite;
+}
+
+@keyframes pulseSupport {
+
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.08);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+
+}
+@media (max-width: 480px) {
+
+    .support-btn {
+        width: 58px;
+        height: 58px;
+
+        font-size: 24px;
+
+        bottom: 18px;
+        right: 18px;
+    }
+
+}
+
 </style>
 </head>
 
 <body>
+
+<div class="support-btn" onclick="accionCargar()">
+    <i class="fa-solid fa-headset"></i>
+</div>
+
+<div class="particles"></div>
 
 <div id="loader">
     <div class="spinner"></div>
@@ -1000,6 +1112,13 @@ setInterval(() => {
 
     document.getElementById("jugadores").innerText =
         n.toLocaleString("es-ES");
+        const counter = document.querySelector(".counter");
+
+counter.style.transform = "scale(1.05)";
+
+setTimeout(() => {
+    counter.style.transform = "scale(1)";
+}, 180);
 
 }, 3000);
 
